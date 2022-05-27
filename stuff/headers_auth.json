@@ -1,0 +1,23 @@
+{
+    "accept": "*/*",
+    "accept-encoding": "gzip, deflate",
+    "accept-language": "en-US,en;q=0.5",
+    "alt-used": "music.youtube.com",
+    "authorization": "SAPISIDHASH 1653331201_94dfe580361bc9674b24d9352754d3abbd26861f",
+    "connection": "keep-alive",
+    "content-encoding": "gzip",
+    "content-type": "application/json",
+    "cookie": "VISITOR_INFO1_LIVE=HACxHIP7rJQ; SID=KQiooYCvyjHeOAh_IV60m6te4D-P6h1XCbWHv42F7ema7I-E3XhR0QLNRHTyPxL1xqlZtA.; __Secure-1PSID=KQiooYCvyjHeOAh_IV60m6te4D-P6h1XCbWHv42F7ema7I-EGOV5IoD6Z0lkp-FGRy4EpQ.; __Secure-3PSID=KQiooYCvyjHeOAh_IV60m6te4D-P6h1XCbWHv42F7ema7I-EP71GkookQuUQ8JuBgoeXXQ.; HSID=Asqm384d6D1V4oVP1; SSID=AipLQbrqVchoragNJ; APISID=ZIJOBdVwySdPzk_s/ATbXAn8icoMzdfqG9; SAPISID=Y3zcN165MhAxZKyR/AyhyvIXNA3KpOWm2Q; __Secure-1PAPISID=Y3zcN165MhAxZKyR/AyhyvIXNA3KpOWm2Q; __Secure-3PAPISID=Y3zcN165MhAxZKyR/AyhyvIXNA3KpOWm2Q; LOGIN_INFO=AFmmF2swRgIhANraGJl2ZEtcouxP_JuNLLDmn5tYU2MF18wIm3SzdLd5AiEA2-b636wUOdJ15_cbdHjAImbB1wpP4IJZBc_BzbrNCs0:QUQ3MjNmeFhiOUZfR01rTHJuTmJpSWwwSDdNdkJXUUpzcDkzUkVhWkRxZmdnTlh1T0lWak1FZWZyYkJkYk5HVEpULVRjSWVYNFlrVnJOdFN0TmFrenJ5Wm0xS2N6NjJMRHc2SmxxMUN5bDlPLTJyQVotdi1QTjZkNXZ6VkQxUmw2RFZUTGNzaXQydC1IYzFLTWluLVFuajhPWTdkSFJ1dHp3; SIDCC=AJi4QfG2EKOBJiSscOh4L6zc42nZujZO12cbwH_f0oH9qkbinTjq_6ve5pGvbfxkX1z0--8jKHs; __Secure-3PSIDCC=AJi4QfHSWMjbMMw1ZcSlBv3G1fiNebPJR8CvZYmh484X2uESClkljnr-YWxM4bRtkD0iPyjQCnQ; PREF=tz=Europe.Belgrade&f6=40000000; _gcl_au=1.1.595299166.1653257463; YSC=DtmLEO-X640",
+    "origin": "https://music.youtube.com",
+    "referer": "https://music.youtube.com/",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "same-origin",
+    "sec-fetch-site": "same-origin",
+    "te": "trailers",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "x-goog-authuser": "0",
+    "x-goog-visitor-id": "CgtIQUN4SElQN3JKUSjYqa-UBg%3D%3D",
+    "x-origin": "https://music.youtube.com",
+    "x-youtube-client-name": "67",
+    "x-youtube-client-version": "1.20220518.01.00"
+}

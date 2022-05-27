@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Test">
+    <title>Test</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+
+  <body>
+
+      <h1 id="logo-title">Index Page</h1>
+
+
+      <form id="form1" action="{{ url_for('.download') }}" method="post">
+        <div id="format-radio-button">
+          <h4>Select format:</h4>
+          <input type="radio" id="format-mp4" name="format_selector" value="mp4">
+          <label for="format-mp4">mp4</label>
+          <input type="radio" id="format-mp4" name="format_selector" value="mp3">
+          <label for="format-mp3">mp3</label>
+        </div>
+
+        <br><br>
+
+        <textarea name="song_input" cols="40" rows="30" class="inputText" id="inputText1" placeholder="List the songs here."></textarea>
+
+        <br><br>
+
+        <button id="button1" type="submit">download</button>
+      </form>
+
+  </body>
+</html>

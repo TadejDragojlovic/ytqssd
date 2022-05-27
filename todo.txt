@@ -1,0 +1,4 @@
+- dodaj za '(audio)'
+- lepo imenovanje konvertovanih fajlova
+- yt music
+- imenovanje out fajla po konstruisanom query-ju
