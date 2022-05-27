@@ -2,6 +2,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 import re
 import sys
+import os
 
 import time
 
@@ -73,7 +74,7 @@ def getLinksYTMUSIC(songs: list):
 
 def _downloadSongs(song_links: list, format: str):
 
-    default_path = '/home/taduj/python/song-downloader/songs'
+    default_path = str(os.getcwd())+'/songs'
 
     ydl_opts = {'format': 'm4a/bestaudio/best',
                 'quiet': True,
