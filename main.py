@@ -9,24 +9,11 @@ import time
 from ytmusicapi import YTMusic
 from yt_dlp import YoutubeDL
 
-# NOTE:
-'''
-  * No real implementation of input yet, just reading from a file for easier
-  testing
-'''
-
-# REMINDER: Upali sajt `heroku ps:scale web=1`
-
 # TODO:
 '''
-  * Do you remove the songs (and the list) after download process is completed on the website?
-    * If so, make the function to purge all data after download process is finished
-  * Implement easy way to benchmark functions
+  * Benchmark?
   * Figure out how would the YTMusic api authorization work on complete website.
-  * Multithreading (and test on the website)
-  * Add function for renaming downloaded files
-  * Check for format (mp3 or mp4) in `_downloadSongs()`
-  * Delete the other heroku app
+  * Multithreading?
 '''
 
 API = YTMusic()

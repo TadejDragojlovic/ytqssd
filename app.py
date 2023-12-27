@@ -11,9 +11,21 @@ li = []
 
 """
 TODO:
-- separate text download and downloading through the list
-- show the list on "results.html", so the user can see the list while he's adding a new song
+[app.py]
+- figure out how to show the list (is results.html really needed?)
 - figure out why i always get 20 results even tho limit is 5 (line 26)
+- clear local folder used to store downloaded songs and "songz.zip" after user is finished
+
+[index.html]
+- refactor the index file, so we can easily expand on it (don't include search box by default)
+- showcase the list of songs on the rightside, make it collapsable?
+
+[downloading.html]
+- do I need this html template?
+- inform the user that the data is being processed/downloaded
+
+[static]
+- match the fonts/font-sizes, and test if it is proportional ENOUGH
 """
 
 @app.route('/', methods=['GET', 'POST']) # Home page
