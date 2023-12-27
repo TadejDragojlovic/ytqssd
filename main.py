@@ -9,23 +9,27 @@ import time
 from ytmusicapi import YTMusic
 from yt_dlp import YoutubeDL
 
-
 # NOTE:
 '''
   * No real implementation of input yet, just reading from a file for easier
   testing
 '''
 
+# REMINDER: Upali sajt `heroku ps:scale web=1`
+
 # TODO:
 '''
+  * Do you remove the songs (and the list) after download process is completed on the website?
+    * If so, make the function to purge all data after download process is finished
   * Implement easy way to benchmark functions
   * Figure out how would the YTMusic api authorization work on complete website.
   * Multithreading (and test on the website)
   * Add function for renaming downloaded files
-  * Do you remove the songs (and the list) after download process is completed on the website?
-    * If so, make the function to purge all data after download process is finished
   * Check for format (mp3 or mp4) in `_downloadSongs()`
+  * Delete the other heroku app
 '''
+
+API = YTMusic()
 
 def _readFile(filename: str):
     '''
@@ -47,7 +51,7 @@ def _readFile(filename: str):
 
     return songs
 
-def getLinksYTMUSIC(songs: list):
+def gatherLinks(songs: list):
     '''
     * PARAMETERS:
     - song_list [list]: list containing the song names
@@ -56,33 +60,76 @@ def getLinksYTMUSIC(songs: list):
     Constructs youtube links for all inputed songs. (Finds their videoIds)
 
     * RETURN:
-    -> Returns a list of links for each song. [list]
+    -> Returns a list of links for each song. list
     '''
-    API = YTMusic("stuff/headers_auth.json")
 
     #start = time.time()
-
     base_url = 'https://www.youtube.com/watch?v='
 
     results = []
+    print("searching...")
     for song in songs:
-        print("searching...")
-        results.append(f"{base_url}{API.search(query=song, limit=3)[0]['videoId']}")
+        search_results = API.search(query=song, limit=20)
+
+        top_result = _skipGarbage(search_results)
+        if top_result != -1:
+            results.append(f"{base_url}{search_results[top_result]['videoId']}")
+        else:
+            print(f"Nothing was found for a given keyword. ({song})")
 
     #print("Finished `_testYTMusic()` in : %f" % (time.time() - start))
     return results
 
-def _downloadSongs(song_links: list, format: str):
 
+# Doc: "https://ytmusicapi.readthedocs.io/en/stable/reference.html#ytmusicapi.YTMusic.search"
+def _search(keyword: str):
+    base_url = 'https://www.youtube.com/watch?v='
+
+    search_results = API.search(query=keyword, filter="songs", limit=5)
+    # top_results = _skipGarbage(search_results) # REMINDER: this is useful for console app
+
+    return search_results
+
+# Helper function for `getLinksYTMUSIC()`
+def _skipGarbage(search_results: list):
+    '''
+    * PARAMETERS:
+    - search_results [list]: a list containing results from `API.search()`
+
+    * DESCRIPTION:
+    Check for errors and find the first 'song' or 'video' in the provided list
+
+    * RETURN:
+    -> Returns the list of valid results, valid results are only of type `videos` or `songs`. [list]
+    '''
+
+    '''
+    REMINDER: OVAKO SE RADI NA NOVOM SAJTU, A INDEX VRACA NA STARI NACIN
+    valid_results = []
+
+    for result in search_results:
+        if result['resultType'] == 'song' or result['resultType'] == 'video':
+            valid_results.append(result)
+
+    return valid_results
+    '''
+
+    for result in search_results:
+        if result['resultType'] == 'song' or result['resultType'] == 'video':
+            return search_results.index(result)
+
+    return -1
+
+
+def downloadSongs(song_links: list):
+    # REMINDER: Only 'm4a' FORMAT SO FAR
+
+    start = time.time()
     default_path = str(os.getcwd())+'/songs'
 
-    ydl_opts = {'format': 'm4a/bestaudio/best',
+    ydl_opts = {'format': 'm4a',
                 'quiet': True,
                 'paths': {'home': default_path},
-                'postprocessors': [] if format=='mp4' else \
-                [{
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'mp3'}]
                 }
 
     print("Downloading...")
@@ -93,14 +140,22 @@ def _downloadSongs(song_links: list, format: str):
 
 
 if __name__ == '__main__':
-    #start = time.time()
+    start = time.time()
 
+    print("aaaaaa")
+
+    """
+    song_list = _readFile('maki/maki-pop.txt')
     print("Succesfully imported.")
 
-    #song_list = _readFile('songs.txt')
+    # print("Songs: ", song_list)
 
-    #song_links = getLinksYTMUSIC(song_list)
+    song_links = getLinksYTMUSIC(song_list)
 
-    #_downloadSongs(song_links, format='mp4')
+    print("Links: ", song_links)
 
-    #print("Finished `main()` in : %f" % (time.time() - start))
+    _downloadSongs(song_links, format='mp4')
+
+    """
+
+    print("Finished `main()` in : %f" % (time.time() - start))

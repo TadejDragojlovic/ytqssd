@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="description" content="Test">
-		<meta name="viewport" content="initial-scale = 1.0"/>
+    <meta name="viewport" content="initial-scale = 1.0"/>
 
     <!-- old bootstrap, not sure what it does -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -35,7 +35,7 @@
 				</li>
 
 				<li class="has-subnav">
-					<a href="/quick-list">
+					<a href="#">
 						<i class="fa fa-file-text fa-2x"></i>
 						<span class="nav-text">Quick Text List</span>
 					</a>
@@ -59,35 +59,14 @@
 			</a>
 		</div>
 
-		<!-- REMINDER: probably don't need this in index.html -->
-		<!--
+		<!-- TODO: show the list even on result.html -->
+		<!-- <h3 id="list-header">List:</h3> -->
+
 		{% for item in LIST %}
 		<p> {{ item[0] }} - {{ item[1] }} </p>
 		{% endfor %}
 
-		<br><br>
-		-->
-
-		<!-- search textbox
-		clear list button -->
-		<div id="div-1">
-
-			<form id="_form" action="/" method="post">
-				<input id="keyword-textbox" type="text" name="query" placeholder="Enter a keyword to search...">
-			</form>
-
-			<form id="_form" action="{{ url_for('.clear_list') }}" method="get">
-				<!-- <input id="keyword-textbox" type="submit" value="Clear list"/> -->
-				<input class="btn btn-lg btn-primary clb" type="submit" value="Clear list"/>
-			</form>
-
-		</div>
-
-		{% block results %}{% endblock %}
-
 		<!-- TODO: Figure out how to inform user about whether its processing/downloading -->
-		<!-- REMINDER: probably don't need this in index.html -->
-		<!--
 		<div id="div-1">
 
 			<form id="_form" action="{{ url_for('.download') }}" method="post">
@@ -96,7 +75,6 @@
 			</form>
 
 		</div>
-		-->
 
   </body>
 </html>

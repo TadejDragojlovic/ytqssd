@@ -1,38 +1,102 @@
 from flask import Flask
 from flask import request, render_template, send_file
 
-from main import getLinksYTMUSIC, _downloadSongs
+from main import gatherLinks, downloadSongs, _search
 import shutil
+import time
 
 app = Flask(__name__)
 
+li = []
+
+"""
+TODO:
+- separate text download and downloading through the list
+- show the list on "results.html", so the user can see the list while he's adding a new song
+- figure out why i always get 20 results even tho limit is 5 (line 26)
+"""
 
 @app.route('/', methods=['GET', 'POST']) # Home page
-def index():
+def index_page():
+    print("INDEX PAGE.\n")
     if request.method == 'POST':
-        return render_template('downloading.html')
+        # this request is to display results of a given search query
+        raw_results = _search(request.form['query'])
+
+        # number of results found
+        print("Number of results found: %d\n" % len(raw_results))
+
+        # this includes (video_id, name, artist, thumbnail)
+        clean_results = []
+        i=0
+        for result in raw_results:
+            if(i>9):
+                break
+            artist = result['artists'][0]['name']
+            name = result['title']
+            _id = result['videoId']
+            thumbnail = f"https://img.youtube.com/vi/{_id}/hqdefault.jpg"
+            clean_results.append([artist, name, _id, thumbnail])
+            i+=1
+
+        print("Showing results.\n")
+        return render_template('results.html', CLEAN_RESULTS=clean_results)
     else:
         return render_template('index.html')
 
 
-@app.route('/download', methods=['GET', 'POST']) # Download page
+# Download page
+@app.route('/download', methods=['GET', 'POST'])
 def download():
+    start = time.time()
+
     song_input = request.form['song_input'].split('\n')
 
-    song_links = getLinksYTMUSIC(song_input)
-
-    selected_format = request.form['format_selector']
+    song_links = gatherLinks(song_input)
 
     # main function to download the song
-    _downloadSongs(song_links, format=selected_format)
+    downloadSongs(song_links)
 
-    # Zipping the folder
+    # Zipping the folder (we need to store it locally, so we can send it out zipped)
     shutil.make_archive('songz', 'zip', 'songs/')
 
-    # testing the download function
+    print("Finished `main()` in : %f" % (time.time() - start))
+
     path = "songz.zip"
-    return send_file(path, as_attachment=True)
+    try:
+        return send_file(path)
+    except Exception as e:
+        return str(e)
+
+
+# Add to list
+@app.route('/add', methods=['GET'])
+def add_to_list():
+    if(request.method == "GET"):
+        artist = request.args.get("artist-name")
+        song = request.args.get("song-name")
+        li.append([artist, song])
+
+        # TODO: Make it stay on the page when submitting the request
+        return render_template("index.html", LIST=li)
+    else:
+        return "Error"
+
+
+@app.route('/clear', methods=['GET'])
+def clear_list():
+    if(request.method == "GET"):
+        global li
+        li=[]
+        return render_template("index.html")
+    else:
+        return "Error"
+
+@app.route('/quick-list', methods=['GET', 'POST'])
+def text_quick_list():
+    return render_template("quick-list.html")
+
 
 # Main driver function
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, host='127.0.0.1')
