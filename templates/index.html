@@ -14,12 +14,15 @@ clear list button -->
 <div id="div-1">
 
 	<form id="_form" action="/" method="post">
-		<input id="keyword-textbox" type="text" name="query" placeholder="Enter a keyword to search...">
+		<div class="hz-div">
+			<input id="keyword-textbox" type="text" name="query" placeholder="Enter a keyword to search...">
+			<input class="btn btn-lg btn-primary clb bsq" name="search_query" type="submit" value="Go">
+		</div>
 	</form>
 
-	<form id="_form" action="{{ url_for('.clear_list') }}" method="get">
+	<!-- <form id="_form" action="{{ url_for('.clear_list') }}" method="get">
 		<input class="btn btn-lg btn-primary clb" type="submit" value="Clear list"/>
-	</form>
+	</form> -->
 
 </div>
 

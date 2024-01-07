@@ -17,7 +17,7 @@ TODO:
 - clear local folder used to store downloaded songs and "songz.zip" after user is finished
 
 [index.html]
-- refactor the index file, so we can easily expand on it (don't include search box by default)
+- figure out where to put clear list button, currently greyed out
 - showcase the list of songs on the rightside, make it collapsable?
 
 [downloading.html]
@@ -26,6 +26,7 @@ TODO:
 
 [static]
 - match the fonts/font-sizes, and test if it is proportional ENOUGH
+- in index.html button "Go" is not aligned properly when zoomed in
 """
 
 @app.route('/', methods=['GET', 'POST']) # Home page
@@ -33,7 +34,11 @@ def index_page():
     print("INDEX PAGE.\n")
     if request.method == 'POST':
         # this request is to display results of a given search query
-        raw_results = _search(request.form['query'])
+        try:
+            raw_results = _search(request.form['query'])
+        except Exception as e:
+            print("Error while searching for query. Error: ", e)
+            return render_template('index.html')
 
         # number of results found
         print("Number of results found: %d\n" % len(raw_results))
