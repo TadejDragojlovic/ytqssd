@@ -72,8 +72,8 @@ def gatherLinks(songs: list):
 def _search(keyword: str):
     base_url = 'https://www.youtube.com/watch?v='
 
-    search_results = API.search(query=keyword, filter="songs", limit=5)
-    # top_results = _skipGarbage(search_results) # REMINDER: this is useful for console app
+    search_results = API.search(query=keyword, filter="songs") # returns by default 20 search results
+    # top_results = _skipGarbage(search_results) # REMINDER: this is useful for console app (?)
 
     return search_results
 

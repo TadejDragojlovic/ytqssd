@@ -13,7 +13,6 @@ li = []
 TODO:
 [app.py]
 - figure out how to show the list (is results.html really needed?)
-- figure out why i always get 20 results even tho limit is 5 (line 26)
 - clear local folder used to store downloaded songs and "songz.zip" after user is finished
 
 [index.html]
@@ -26,6 +25,7 @@ TODO:
 
 [static]
 - match the fonts/font-sizes, and test if it is proportional ENOUGH
+- split artist and song name when displaying results
 - in index.html button "Go" is not aligned properly when zoomed in
 """
 
@@ -45,16 +45,12 @@ def index_page():
 
         # this includes (video_id, name, artist, thumbnail)
         clean_results = []
-        i=0
-        for result in raw_results:
-            if(i>9):
-                break
+        for i, result in enumerate(raw_results):
             artist = result['artists'][0]['name']
             name = result['title']
             _id = result['videoId']
             thumbnail = f"https://img.youtube.com/vi/{_id}/hqdefault.jpg"
             clean_results.append([artist, name, _id, thumbnail])
-            i+=1
 
         print("Showing results.\n")
         return render_template('results.html', CLEAN_RESULTS=clean_results)
@@ -69,20 +65,31 @@ def download():
 
     song_input = request.form['song_input'].split('\n')
 
-    song_links = gatherLinks(song_input)
-
-    # main function to download the song
-    downloadSongs(song_links)
-
-    # Zipping the folder (we need to store it locally, so we can send it out zipped)
-    shutil.make_archive('songz', 'zip', 'songs/')
-
-    print("Finished `main()` in : %f" % (time.time() - start))
-
-    path = "songz.zip"
     try:
-        return send_file(path)
+        song_links = gatherLinks(song_input)
+
+        # main function to download the song
+        downloadSongs(song_links)
+
+        # Zipping the folder (we need to store it locally, so we can send it out zipped)
+        shutil.make_archive('songz', 'zip', 'songs/')
+
+        print("Finished `main()` in : %f" % (time.time() - start))
+
+        path = "songz.zip"
+
+        try:
+            return send_file(path)
+        except Exception as e:
+            return str(e)
+
     except Exception as e:
+        # Case if the list is empty
+        if(len(song_input) == 1):
+            if(song_input[0] == ''):
+                return render_template("quick-list.html")
+
+        # Different unknown error
         return str(e)
 
 
@@ -95,6 +102,7 @@ def add_to_list():
         li.append([artist, song])
 
         # TODO: Make it stay on the page when submitting the request
+        print("LIST: \n", li)
         return render_template("index.html", LIST=li)
     else:
         return "Error"
