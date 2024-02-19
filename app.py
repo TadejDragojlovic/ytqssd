@@ -24,7 +24,6 @@ TODO:
 - inform the user that the data is being processed/downloaded
 
 [static]
-- split artist and song name when displaying results
 - in index.html button "Go" is not aligned properly when zoomed in
 """
 

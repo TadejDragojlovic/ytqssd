@@ -47,7 +47,7 @@ a {
 .av-button {
 	display: flex;
 
-	font-size: clamp(12px, 1vw, 28px);
+  font-size: clamp(0.1vw, 0.9vw, 1.3vw);
 	color: #ffffff;
 
 	width: 100%;
@@ -63,12 +63,11 @@ a {
 }
 
 .av-button:hover {
-		background: rgba(100, 30, 190, 0.2);
-		font-size: clamp(13px, 1.2vw, 30px);
+  background: rgba(100, 30, 190, 0.2);
+  font-size: clamp(0.12vw, 1.1vw, 1.5vw);
 }
 
 .clb {
-		/* background: rgba(100, 30, 190, 0.8); */
 		font-size: clamp(12px, 1.1vw, 28px);
     background: rgba(237, 214, 105, 1);
 		color: #35223e;
@@ -118,7 +117,6 @@ body {
     align-items: center;
 
     width: 100%;
-    /* border: red 5px solid; */
 }
 
 #inputText1 {
@@ -178,30 +176,30 @@ body {
   max-width: 100%;
 }
 
+.result-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  margin-left: -15px;
+  margin-right: 15px;
+}
+
 /* Container for the image */
 .rounded-rectangle {
   border-radius: 2%;
   width: 30%;
-}
-
-/* Image size */
-img {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-  margin-left: -1rem;
+  min-width: 40px;
 }
 
 /* Title and artist */
 .ms-3 {
-  font-size: clamp(12px, 1vw, 28px);
-  color: #ffffff;
-  /* FIXME: if text too long, but '...' after it */
+  display: block;
+  /* TODO: test for long titles, if text too long, but '...' after it */
 
-  max-width: 400px;
-  min-width: 300px;
-  position: relative;
-
-  left: 10px;
+  width: 50%;
+  margin-left: 15px;
 }
 
 .button-container {

@@ -8,20 +8,23 @@
 		<form action="{{ url_for('.add_to_list') }}" method="get">
 			<li class="list-group-item d-flex justify-content-between align-items-center">
 
-				<div class="d-flex align-items-center">
+				<div class="d-flex align-items-center result-container">
 
-					<img src={{ result[3] }} class="rounded-rectangle" alt=""/>
+					<img src="{{ result[3] }}" class="rounded-rectangle" alt=""/>
+
 					<div class="ms-3">
-						<!-- TODO: MAKE IT LOOK NICE (SONG NAME ON TOP, SMALLER FONT ARTIST NAME BELOW) -->
-						<input type="hidden" name="artist-name" value="{{ result[0] }} " class="text-muted mb-0">{{ result[0] }}</input>
-						<input type="hidden" name="song-name" value="{{ result[1] }}" class="fw-bold mb-1">{{ result[1] }}</input>
+						<div style="height: 50%; color: white; font-size: clamp(0.2vw, 1.25vw, 2vw);">
+							<input type="hidden" name="song-name" value="{{ result[1] }}" class="fw-bold mb-1">{{ result[1] }}</input>
+						</div>
+						<div style="height: 50%; color: grey; font-size: clamp(0.1vw, 0.9vw, 1.3vw);">
+							<input type="hidden" name="artist-name" value="{{ result[0] }} " class="text-muted mb-0">{{ result[0] }}</input>
+						</div>
 					</div>
 
-				</div>
-
-				<div class="button-container">
-					<input type="submit" value="Add" class="btn btn-lg btn-primary av-button"></input>
-					<a href="https://www.youtube.com/watch?v={{ result[2] }}" class="btn btn-lg btn-primary av-button" role="button">Visit</a>
+					<div class="button-container">
+						<input type="submit" value="Add" class="btn btn-lg btn-primary av-button"></input>
+						<a href="https://www.youtube.com/watch?v={{ result[2] }}" class="btn btn-lg btn-primary av-button" role="button">Visit</a>
+					</div>
 				</div>
 
 			</li>
