@@ -15,6 +15,9 @@ TODO:
 - figure out how to show the list (is results.html really needed?)
 - clear local folder used to store downloaded songs and "songz.zip" after user is finished
 
+[base.html]
+- change logo name to "ytqssd"
+
 [index.html]
 - figure out where to put clear list button, currently greyed out
 - showcase the list of songs on the rightside, make it collapsable?
