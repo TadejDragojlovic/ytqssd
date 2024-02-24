@@ -14,6 +14,7 @@ TODO:
 [app.py]
 - figure out how to show the list (is results.html really needed?)
 - clear local folder used to store downloaded songs and "songz.zip" after user is finished
+- add "about.html" page
 
 [base.html]
 - change logo name to "ytqssd"
